@@ -1,68 +1,101 @@
-/* Базові налаштування */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
+/* Базові стилі для Sticky Footer (Пункт 5) */
+html, body {
+    height: 100%;
     margin: 0;
-    background-color: #f4f7f6;
-    color: #333;
 }
 
-/* Шапка сторінки */
-header {
-    background: linear-gradient(135deg, #2c3e50, #3498db);
-    color: white;
-    padding: 2rem 1rem;
-    text-align: center;
-}
-
-/* Контейнер для контенту */
-.container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 0 20px;
+.wrapper {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    min-height: 100%;
 }
 
-/* Картки секцій */
-.card {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-h2 {
-    color: #2980b9;
-    border-bottom: 2px solid #ecf0f1;
-    padding-bottom: 10px;
-}
-
-/* Демонстраційні елементи */
-.demo-box {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 15px;
-}
-
-.demo-box span {
-    background: #e74c3c;
-    color: white;
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-}
-
-/* Футер */
-footer {
-    text-align: center;
+.container {
+    flex: 1; /* Змушує контент займати весь вільний простір, штовхаючи футер вниз */
     padding: 20px;
-    font-size: 0.8rem;
-    color: #7f8c8d;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Адаптивна градка (Пункт 1 та 2) */
+.flex-grid {
+    display: flex;
+    flex-wrap: wrap; /* Дозволяє елементам переноситись */
+    gap: 20px;
+    align-items: stretch; /* Робить колонки однакової висоти (Пункт 2) */
+}
+
+.card {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    flex: 1 1 calc(33.333% - 20px); /* 3 колонки на десктопі */
+    box-sizing: border-box;
+}
+
+/* Медіа-запити для адаптивності (Пункт 1) */
+@media (max-width: 768px) {
+    .card {
+        flex: 1 1 calc(50% - 20px); /* 2 колонки на планшеті */
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        flex: 1 1 100%; /* 1 колонка на мобільному */
+    }
+}
+
+/* Горизонтальне та вертикальне вирівнювання (Пункт 3) */
+.feature-item {
+    display: flex;
+    background: #e9ecef;
+    margin-top: 40px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.info-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Вертикальне вирівнювання */
+    align-items: center;     /* Горизонтальне вирівнювання */
+    padding: 40px;
+    text-align: center;
+}
+
+.image-placeholder {
+    flex: 1;
+    background: #3498db;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+}
+
+/* Зміна порядку виводу (Пункт 4) */
+@media (min-width: 769px) {
+    .image-placeholder {
+        order: -1; /* Зображення буде зліва на десктопі */
+    }
+    .info-box {
+        order: 1; /* Текст буде справа */
+    }
+}
+
+/* Стиль футера */
+.footer {
+    background: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+header {
+    background: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 30px 0;
 }

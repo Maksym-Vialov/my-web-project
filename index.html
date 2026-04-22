@@ -3,40 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Основи HTML5 та CSS3</title>
+    <title>Лабораторна робота: Flexbox</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <h1>Світ веб-розробки</h1>
-    </header>
+    <div class="wrapper">
+        <header>
+            <h1>Адаптивна верстка на Flexbox</h1>
+        </header>
 
-    <main class="container">
-        <section class="card">
-            <h2>Ознайомлення з HTML5</h2>
-            <p>HTML5 — це сучасний стандарт мови розмітки, який дозволяє створювати структуру сторінки за допомогою семантичних тегів:</p>
-            <ul>
-                <li><code>&lt;header&gt;</code> та <code>&lt;footer&gt;</code></li>
-                <li><code>&lt;main&gt;</code> та <code>&lt;section&gt;</code></li>
-                <li><code>&lt;article&gt;</code> для контенту</li>
-            </ul>
-        </section>
+        <main class="container">
+            <!-- Пакет 2: Колонки однакової висоти -->
+            <section class="flex-grid">
+                <article class="card">
+                    <h2>Колонка 1</h2>
+                    <p>Тут небагато тексту. Але завдяки Flexbox ця картка буде такої ж висоти, як і сусідня, де тексту значно більше.</p>
+                </article>
+                <article class="card">
+                    <h2>Колонка 2</h2>
+                    <p>Ця колонка містить більше контенту. У звичайній верстці вони були б різної довжини, але `align-items: stretch` робить їх ідентичними за висотою. Це забезпечує візуальну цілісність дизайну.</p>
+                </article>
+                <article class="card">
+                    <h2>Колонка 3</h2>
+                    <p>Ще одна колонка для демонстрації адаптивності сітки.</p>
+                </article>
+            </section>
 
-        <section class="card">
-            <h2>Стилізація через CSS3</h2>
-            <p>CSS3 відповідає за зовнішній вигляд. У цьому проекті використано:</p>
-            <div class="demo-box">
-                <span>Flexbox верстка</span>
-                <span>Закруглені кути</span>
-                <span>Тіні (Box Shadow)</span>
-            </div>
-        </section>
-    </main>
+            <!-- Пункт 3: Вирівнювання та Пункт 4: Зміна порядку -->
+            <section class="feature-section">
+                <div class="feature-item">
+                    <div class="info-box">
+                        <h3>Заголовок блоку</h3>
+                        <p>Цей текст вирівняно по центру по обох осях.</p>
+                    </div>
+                    <!-- Цей блок буде першим на мобільних, але другим на десктопах -->
+                    <div class="image-placeholder">
+                        <span>Зображення (Зміна порядку)</span>
+                    </div>
+                </div>
+            </section>
+        </main>
 
-    <footer>
-        <p>&copy; 2026 Студент IT. Створено для лабораторної роботи.</p>
-    </footer>
+        <!-- Пункт 5: Прикріплений футер -->
+        <footer class="footer">
+            <p>&copy; 2026 Лабораторна робота з CSS3 Flexbox</p>
+        </footer>
+    </div>
 
 </body>
 </html>
