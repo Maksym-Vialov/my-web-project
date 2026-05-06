@@ -3,51 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Лабораторна робота: Flexbox</title>
+    <title>Advanced Dashboard - Grid Lab</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="wrapper">
-        <header>
-            <h1>Адаптивна верстка на Flexbox</h1>
+    <div class="app-container">
+        <header class="page-header">
+            <div class="header-content">
+                <h1>Система моніторингу мережі</h1>
+                <span class="user-profile">Адміністратор: Прізвище І.</span>
+            </div>
         </header>
 
-        <main class="container">
-            <!-- Пакет 2: Колонки однакової висоти -->
-            <section class="flex-grid">
-                <article class="card">
-                    <h2>Колонка 1</h2>
-                    <p>Тут небагато тексту. Але завдяки Flexbox ця картка буде такої ж висоти, як і сусідня, де тексту значно більше.</p>
-                </article>
-                <article class="card">
-                    <h2>Колонка 2</h2>
-                    <p>Ця колонка містить більше контенту. У звичайній верстці вони були б різної довжини, але `align-items: stretch` робить їх ідентичними за висотою. Це забезпечує візуальну цілісність дизайну.</p>
-                </article>
-                <article class="card">
-                    <h2>Колонка 3</h2>
-                    <p>Ще одна колонка для демонстрації адаптивності сітки.</p>
-                </article>
-            </section>
+        <aside class="left-aside">
+            <nav class="side-nav">
+                <div class="nav-group">ОСНОВНЕ</div>
+                <div class="nav-item active">Головна панель</div>
+                <div class="nav-item">Аналітика трафіку</div>
+                <div class="nav-group">КЕРУВАННЯ</div>
+                <div class="nav-item">Користувачі</div>
+                <div class="nav-item">Логи системи</div>
+            </nav>
+        </aside>
 
-            <!-- Пункт 3: Вирівнювання та Пункт 4: Зміна порядку -->
-            <section class="feature-section">
-                <div class="feature-item">
-                    <div class="info-box">
-                        <h3>Заголовок блоку</h3>
-                        <p>Цей текст вирівняно по центру по обох осях.</p>
+        <main class="main-view">
+            <div class="widget-grid">
+                
+                <!-- Великий віджет: Графік (Займає 2 колонки) -->
+                <section class="widget wide chart-widget">
+                    <h3>Статистика завантаження серверів</h3>
+                    <div class="visual-chart">
+                        <div class="bar" style="height: 40%"><span>Пн</span></div>
+                        <div class="bar" style="height: 70%"><span>Вт</span></div>
+                        <div class="bar" style="height: 55%"><span>Ср</span></div>
+                        <div class="bar" style="height: 90%"><span>Чт</span></div>
+                        <div class="bar" style="height: 65%"><span>Пт</span></div>
                     </div>
-                    <!-- Цей блок буде першим на мобільних, але другим на десктопах -->
-                    <div class="image-placeholder">
-                        <span>Зображення (Зміна порядку)</span>
+                </section>
+
+                <!-- Віджети показників -->
+                <div class="widget status-card">
+                    <h3>Активні вузли</h3>
+                    <div class="big-number">1,248</div>
+                    <p class="trend up">↑ 12% за сьогодні</p>
+                </div>
+
+                <div class="widget status-card">
+                    <h3>Використання RAM</h3>
+                    <div class="big-number">64%</div>
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: 64%"></div>
                     </div>
                 </div>
-            </section>
+
+                <!-- Секція з таблицею (Займає весь рядок) -->
+                <section class="widget full-width table-widget">
+                    <h3>Останні події в системі</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Подія</th>
+                                <th>Час</th>
+                                <th>Статус</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>#001</td><td>Авторизація користувача</td><td>10:15</td><td><span class="badge ok">OK</span></td></tr>
+                            <tr><td>#002</td><td>Оновлення бази даних</td><td>09:40</td><td><span class="badge ok">OK</span></td></tr>
+                            <tr><td>#003</td><td>Помилка доступу до API</td><td>08:12</td><td><span class="badge error">ERR</span></td></tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
         </main>
 
-        <!-- Пункт 5: Прикріплений футер -->
-        <footer class="footer">
-            <p>&copy; 2026 Лабораторна робота з CSS3 Flexbox</p>
+        <footer class="page-footer">
+            <p>Лабораторна робота: CSS Grid Layout | Сервер працює на 127.0.0.1:5500</p>
         </footer>
     </div>
 
