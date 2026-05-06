@@ -3,85 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Dashboard - Grid Lab</title>
+    <title>Адаптивний Анімований Банер</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="app-container">
-        <header class="page-header">
-            <div class="header-content">
-                <h1>Система моніторингу мережі</h1>
-                <span class="user-profile">Адміністратор: Прізвище І.</span>
-            </div>
-        </header>
+    <!-- Контейнер банера зі статичним фоном -->
+    <div class="banner">
+        
+        <!-- Три анімовані текстові написи -->
+        <div class="text-content">
+            <h2 class="text-fade">Технології Майбутнього</h2>
+            <p class="text-slide">Сучасні підходи до розробки програмного забезпечення</p>
+            <span class="text-zoom">Приєднуйтесь до нашої команди</span>
+        </div>
 
-        <aside class="left-aside">
-            <nav class="side-nav">
-                <div class="nav-group">ОСНОВНЕ</div>
-                <div class="nav-item active">Головна панель</div>
-                <div class="nav-item">Аналітика трафіку</div>
-                <div class="nav-group">КЕРУВАННЯ</div>
-                <div class="nav-item">Користувачі</div>
-                <div class="nav-item">Логи системи</div>
-            </nav>
-        </aside>
-
-        <main class="main-view">
-            <div class="widget-grid">
-                
-                <!-- Великий віджет: Графік (Займає 2 колонки) -->
-                <section class="widget wide chart-widget">
-                    <h3>Статистика завантаження серверів</h3>
-                    <div class="visual-chart">
-                        <div class="bar" style="height: 40%"><span>Пн</span></div>
-                        <div class="bar" style="height: 70%"><span>Вт</span></div>
-                        <div class="bar" style="height: 55%"><span>Ср</span></div>
-                        <div class="bar" style="height: 90%"><span>Чт</span></div>
-                        <div class="bar" style="height: 65%"><span>Пт</span></div>
-                    </div>
-                </section>
-
-                <!-- Віджети показників -->
-                <div class="widget status-card">
-                    <h3>Активні вузли</h3>
-                    <div class="big-number">1,248</div>
-                    <p class="trend up">↑ 12% за сьогодні</p>
-                </div>
-
-                <div class="widget status-card">
-                    <h3>Використання RAM</h3>
-                    <div class="big-number">64%</div>
-                    <div class="progress-container">
-                        <div class="progress-bar" style="width: 64%"></div>
-                    </div>
-                </div>
-
-                <!-- Секція з таблицею (Займає весь рядок) -->
-                <section class="widget full-width table-widget">
-                    <h3>Останні події в системі</h3>
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Подія</th>
-                                <th>Час</th>
-                                <th>Статус</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>#001</td><td>Авторизація користувача</td><td>10:15</td><td><span class="badge ok">OK</span></td></tr>
-                            <tr><td>#002</td><td>Оновлення бази даних</td><td>09:40</td><td><span class="badge ok">OK</span></td></tr>
-                            <tr><td>#003</td><td>Помилка доступу до API</td><td>08:12</td><td><span class="badge error">ERR</span></td></tr>
-                        </tbody>
-                    </table>
-                </section>
-            </div>
-        </main>
-
-        <footer class="page-footer">
-            <p>Лабораторна робота: CSS Grid Layout | Сервер працює на 127.0.0.1:5500</p>
-        </footer>
+        <!-- Три анімовані PNG-рисунки -->
+        <div class="images-content">
+            <img src="icon1.png" alt="Технологія 1" class="img-float">
+            <img src="icon2.png" alt="Технологія 2" class="img-spin">
+            <img src="icon3.png" alt="Технологія 3" class="img-pulse">
+        </div>
+        
     </div>
 
 </body>
