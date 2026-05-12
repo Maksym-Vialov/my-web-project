@@ -4,8 +4,6 @@ body {
     background-color: #2c3e50; 
     color: #ecf0f1;
     margin: 0;
-    
-    /* Робимо всю сторінку сіткою на 3 рядки: Шапка, Контент, Футер */
     display: grid;
     grid-template-rows: auto 1fr auto;
     min-height: 100vh;
@@ -30,7 +28,6 @@ body {
 /* === СІТКА ВІДЖЕТІВ (CSS GRID) === */
 .widget-grid {
     display: grid;
-    /* Автоматичне створення колонок з мінімальною шириною 280px */
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 25px;
     padding: 40px 20px;
@@ -47,8 +44,6 @@ body {
     border-radius: 15px;
     box-shadow: 0 8px 15px rgba(0,0,0,0.3);
     border-bottom: 5px solid #3498db;
-    
-    /* Flexbox для вирівнювання контенту всередині картки */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -71,7 +66,7 @@ iframe {
     width: 100%;
     height: 190px; 
     border: 2px solid #2c3e50;
-    flex-grow: 1; /* Дозволяє iframe займати вільний простір */
+    flex-grow: 1; 
 }
 
 /* === СТИЛІ API ВИВОДУ === */
@@ -81,7 +76,7 @@ iframe {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: #1a252f; /* Трохи темніший фон для контрасту */
+    background: #1a252f;
     width: 100%;
     border-radius: 8px;
     padding: 10px;
@@ -90,6 +85,7 @@ iframe {
     flex-grow: 1;
 }
 
+/* 3. Стилі Advice API */
 .advice-text { 
     font-family: 'Courier New', Courier, monospace; 
     font-style: italic; 
@@ -97,21 +93,19 @@ iframe {
     color: #f1c40f; 
 }
 
-.weather-text {
-    font-family: Arial, sans-serif;
-    color: #ecf0f1; 
-}
+/* 4. Стилі Weather API */
+.weather-text { font-family: Arial, sans-serif; color: #ecf0f1; }
+.weather-text .temp { font-weight: bold; color: #e74c3c; font-size: 26px; }
+.weather-text .wind { font-size: 13px; color: #95a5a6; margin-top: 5px; }
 
-.weather-text .temp { 
+/* 5. Стилі Crypto API (Нове!) */
+.crypto-text { font-family: 'Courier New', Courier, monospace; color: #ecf0f1; }
+.crypto-label { font-size: 14px; color: #bdc3c7; }
+.crypto-price { 
     font-weight: bold; 
-    color: #e74c3c; 
-    font-size: 26px; 
-}
-
-.weather-text .wind {
-    font-size: 13px;
-    color: #95a5a6;
-    margin-top: 5px;
+    color: #2ecc71; /* Зелений колір грошей */
+    font-size: 28px; 
+    margin-top: 5px; 
 }
 
 /* === КНОПКИ === */
@@ -126,13 +120,11 @@ button {
     text-transform: uppercase;
     font-size: 12px;
     transition: 0.3s;
-    width: 100%; /* Кнопка на всю ширину картки */
+    width: 100%; 
     margin-top: 15px;
 }
 
-button:hover {
-    background: #c0392b;
-}
+button:hover { background: #c0392b; }
 
 /* === ФУТЕР === */
 .page-footer {
