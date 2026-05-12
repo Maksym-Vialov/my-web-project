@@ -20,12 +20,8 @@
         <div class="card">
             <h3>1. YouTube Відео</h3>
             <p>Медіа-віджет програвача.</p>
-            <iframe id="my-video" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-            <!-- Інтерактивні кнопки для перемикання відео -->
-            <div style="display: flex; gap: 10px; width: 100%; margin-top: 15px;">
-                <button onclick="changeVideo('tgbNymZ7vqY')">Відео 1</button>
-                <button onclick="changeVideo('dQw4w9WgXcQ')">Відео 2</button>
-            </div>
+            <!-- Одне фіксоване відео без кнопок -->
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
         </div>
 
         <!-- 2. Google Maps Віджет -->
@@ -67,11 +63,6 @@
 
     <!-- Скрипти для всіх API -->
     <script>
-        // 1. Функція перемикання YouTube відео
-        function changeVideo(videoId) {
-            document.getElementById('my-video').src = `https://www.youtube.com/embed/${videoId}`;
-        }
-
         // 3. Функція для Advice API
         function fetchAdvice() {
             const textElement = document.getElementById('api-text');
@@ -107,19 +98,19 @@
                 });
         }
 
-        // 5. Функція для Фінансового API (Курс Bitcoin)
+        // 5. ОНОВЛЕНА Функція для Фінансового API (Binance API - стабільне)
         function fetchCrypto() {
             const cryptoElement = document.getElementById('crypto-text');
             cryptoElement.innerHTML = "Завантаження...";
 
-            fetch('https://api.coindesk.com/v1/bpi/currentprice.json')
+            fetch('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT')
                 .then(response => response.json())
                 .then(data => {
-                    // Отримуємо ціну і відкидаємо зайві знаки після коми
-                    const price = Math.round(data.bpi.USD.rate_float);
+                    // Отримуємо ціну, перетворюємо у число та відкидаємо копійки
+                    const price = Math.round(parseFloat(data.price));
                     cryptoElement.innerHTML = `
                         <div class="crypto-label">1 BTC = </div>
-                        <div class="crypto-price">$${price.toLocaleString()}</div>
+                        <div class="crypto-price">$${price.toLocaleString('en-US')}</div>
                     `;
                 })
                 .catch(error => {
