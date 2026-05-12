@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мої API та Віджети</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Мої 5 API та Віджетів</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
     <!-- Шапка сторінки -->
     <header class="page-header">
-        <h1>Лабораторна: Інтеграція API та Віджетів</h1>
+        <h1>Лабораторна: Інтеграція 5-ти API та Віджетів</h1>
     </header>
 
     <!-- Основний контейнер з віджетами -->
@@ -19,8 +19,13 @@
         <!-- 1. YouTube Віджет -->
         <div class="card">
             <h3>1. YouTube Відео</h3>
-            <p>Вбудований iframe-віджет.</p>
-            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+            <p>Медіа-віджет програвача.</p>
+            <iframe id="my-video" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+            <!-- Інтерактивні кнопки для перемикання відео -->
+            <div style="display: flex; gap: 10px; width: 100%; margin-top: 15px;">
+                <button onclick="changeVideo('tgbNymZ7vqY')">Відео 1</button>
+                <button onclick="changeVideo('dQw4w9WgXcQ')">Відео 2</button>
+            </div>
         </div>
 
         <!-- 2. Google Maps Віджет -->
@@ -33,12 +38,12 @@
         <!-- 3. REST API (Генератор порад) -->
         <div class="card">
             <h3>3. Advice API</h3>
-            <p>Випадкова порада (Fetch API).</p>
+            <p>Випадкова цитата (Fetch API).</p>
             <div id="api-text" class="api-output advice-text">Натисніть кнопку...</div>
             <button onclick="fetchAdvice()">Отримати пораду</button>
         </div>
 
-        <!-- 4. REST API (Погода) -->
+        <!-- 4. REST API (Погодний інформер) -->
         <div class="card">
             <h3>4. Weather API</h3>
             <p>Поточна погода (м. Тернопіль).</p>
@@ -46,15 +51,28 @@
             <button onclick="fetchWeather()">Оновити погоду</button>
         </div>
 
+        <!-- 5. REST API (Фінансовий інформер) -->
+        <div class="card">
+            <h3>5. Crypto API</h3>
+            <p>Поточний курс Bitcoin.</p>
+            <div id="crypto-text" class="api-output crypto-text">Отримання курсу...</div>
+            <button onclick="fetchCrypto()">Оновити курс</button>
+        </div>
+
     </main>
 
-    <!-- Футер (опціонально, закриває сітку) -->
     <footer class="page-footer">
-        <p>Створено з використанням CSS Grid та Flexbox</p>
+        <p>Створено з використанням CSS Grid, Flexbox та 5-ти різних API</p>
     </footer>
 
+    <!-- Скрипти для всіх API -->
     <script>
-        // Функція для Advice API
+        // 1. Функція перемикання YouTube відео
+        function changeVideo(videoId) {
+            document.getElementById('my-video').src = `https://www.youtube.com/embed/${videoId}`;
+        }
+
+        // 3. Функція для Advice API
         function fetchAdvice() {
             const textElement = document.getElementById('api-text');
             textElement.innerText = "Завантаження..."; 
@@ -69,7 +87,7 @@
                 });
         }
 
-        // Функція для Weather API
+        // 4. Функція для Weather API
         function fetchWeather() {
             const weatherElement = document.getElementById('weather-text');
             weatherElement.innerHTML = "Завантаження...";
@@ -79,7 +97,6 @@
                 .then(data => {
                     const temp = data.current_weather.temperature;
                     const wind = data.current_weather.windspeed;
-                    
                     weatherElement.innerHTML = `
                         <div><span class="temp">${temp}°C</span></div>
                         <div class="wind">Вітер: ${wind} км/год</div>
@@ -90,8 +107,30 @@
                 });
         }
 
+        // 5. Функція для Фінансового API (Курс Bitcoin)
+        function fetchCrypto() {
+            const cryptoElement = document.getElementById('crypto-text');
+            cryptoElement.innerHTML = "Завантаження...";
+
+            fetch('https://api.coindesk.com/v1/bpi/currentprice.json')
+                .then(response => response.json())
+                .then(data => {
+                    // Отримуємо ціну і відкидаємо зайві знаки після коми
+                    const price = Math.round(data.bpi.USD.rate_float);
+                    cryptoElement.innerHTML = `
+                        <div class="crypto-label">1 BTC = </div>
+                        <div class="crypto-price">$${price.toLocaleString()}</div>
+                    `;
+                })
+                .catch(error => {
+                    cryptoElement.innerHTML = "Помилка оновлення курсу.";
+                });
+        }
+
+        // Автоматичний запуск скриптів при завантаженні сторінки
         fetchAdvice();
         fetchWeather();
+        fetchCrypto();
     </script>
 
 </body>
