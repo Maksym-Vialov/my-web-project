@@ -4,19 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Мої API та Віджети</title>
-    <!-- Підключення файлу стилів -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>Лабораторна: Інтеграція API та Віджетів</h1>
+    <!-- Шапка сторінки -->
+    <header class="page-header">
+        <h1>Лабораторна: Інтеграція API та Віджетів</h1>
+    </header>
 
-    <div class="container">
+    <!-- Основний контейнер з віджетами -->
+    <main class="widget-grid">
         
         <!-- 1. YouTube Віджет -->
         <div class="card">
             <h3>1. YouTube Відео</h3>
-            <p>Вбудований iframe-віджет програвача.</p>
+            <p>Вбудований iframe-віджет.</p>
             <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" allowfullscreen></iframe>
         </div>
 
@@ -30,7 +33,7 @@
         <!-- 3. REST API (Генератор порад) -->
         <div class="card">
             <h3>3. Advice API</h3>
-            <p>Випадкова порада (JavaScript Fetch).</p>
+            <p>Випадкова порада (Fetch API).</p>
             <div id="api-text" class="api-output advice-text">Натисніть кнопку...</div>
             <button onclick="fetchAdvice()">Отримати пораду</button>
         </div>
@@ -43,7 +46,12 @@
             <button onclick="fetchWeather()">Оновити погоду</button>
         </div>
 
-    </div>
+    </main>
+
+    <!-- Футер (опціонально, закриває сітку) -->
+    <footer class="page-footer">
+        <p>Створено з використанням CSS Grid та Flexbox</p>
+    </footer>
 
     <script>
         // Функція для Advice API
