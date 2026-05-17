@@ -2,87 +2,231 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Dashboard - Grid Lab</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Лабораторна робота: JavaScript Classes</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; line-height: 1.6; }
+        .task-block { background: #f9f9f9; border: 1px solid #ddd; padding: 15px; margin-bottom: 20px; border-radius: 5px; }
+        input, button { margin: 5px 0; padding: 5px; }
+        button { cursor: pointer; }
+    </style>
 </head>
-<body>
+<body onload="startFloatingText()"> <h2>Лабораторна робота: String, Date, Number, Math</h2>
 
-    <div class="app-container">
-        <header class="page-header">
-            <div class="header-content">
-                <h1>Система моніторингу мережі</h1>
-                <span class="user-profile">Адміністратор: Прізвище І.</span>
-            </div>
-        </header>
-
-        <aside class="left-aside">
-            <nav class="side-nav">
-                <div class="nav-group">ОСНОВНЕ</div>
-                <div class="nav-item active">Головна панель</div>
-                <div class="nav-item">Аналітика трафіку</div>
-                <div class="nav-group">КЕРУВАННЯ</div>
-                <div class="nav-item">Користувачі</div>
-                <div class="nav-item">Логи системи</div>
-            </nav>
-        </aside>
-
-        <main class="main-view">
-            <div class="widget-grid">
-                
-                <!-- Великий віджет: Графік (Займає 2 колонки) -->
-                <section class="widget wide chart-widget">
-                    <h3>Статистика завантаження серверів</h3>
-                    <div class="visual-chart">
-                        <div class="bar" style="height: 40%"><span>Пн</span></div>
-                        <div class="bar" style="height: 70%"><span>Вт</span></div>
-                        <div class="bar" style="height: 55%"><span>Ср</span></div>
-                        <div class="bar" style="height: 90%"><span>Чт</span></div>
-                        <div class="bar" style="height: 65%"><span>Пт</span></div>
-                    </div>
-                </section>
-
-                <!-- Віджети показників -->
-                <div class="widget status-card">
-                    <h3>Активні вузли</h3>
-                    <div class="big-number">1,248</div>
-                    <p class="trend up">↑ 12% за сьогодні</p>
-                </div>
-
-                <div class="widget status-card">
-                    <h3>Використання RAM</h3>
-                    <div class="big-number">64%</div>
-                    <div class="progress-container">
-                        <div class="progress-bar" style="width: 64%"></div>
-                    </div>
-                </div>
-
-                <!-- Секція з таблицею (Займає весь рядок) -->
-                <section class="widget full-width table-widget">
-                    <h3>Останні події в системі</h3>
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Подія</th>
-                                <th>Час</th>
-                                <th>Статус</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>#001</td><td>Авторизація користувача</td><td>10:15</td><td><span class="badge ok">OK</span></td></tr>
-                            <tr><td>#002</td><td>Оновлення бази даних</td><td>09:40</td><td><span class="badge ok">OK</span></td></tr>
-                            <tr><td>#003</td><td>Помилка доступу до API</td><td>08:12</td><td><span class="badge error">ERR</span></td></tr>
-                        </tbody>
-                    </table>
-                </section>
-            </div>
-        </main>
-
-        <footer class="page-footer">
-            <p>Лабораторна робота: CSS Grid Layout | Сервер працює на 127.0.0.1:5500</p>
-        </footer>
+    <div class="task-block">
+        <h3>Завдання 9. Обчислення інтервалу часу</h3>
+        Час 1: <input type="number" id="h1" min="0" max="23" placeholder="Год"> : <input type="number" id="m1" min="0" max="59" placeholder="Хв"><br>
+        Час 2: <input type="number" id="h2" min="0" max="23" placeholder="Год"> : <input type="number" id="m2" min="0" max="59" placeholder="Хв"><br>
+        <button onclick="calculateTimeInterval()">Обчислити інтервал</button>
     </div>
+
+    <div class="task-block">
+        <h3>Завдання 10. Перевірка, чи є вміст полем числом</h3>
+        <input type="text" id="checkNumInput" placeholder="Введіть текст">
+        <button onclick="isFieldANumber()">Перевірити</button>
+    </div>
+
+    <div class="task-block">
+        <h3>Завдання 12. Обчислення гіпотенузи</h3>
+        Катет А: <input type="number" id="catA" placeholder="Довжина A"><br>
+        Катет Б: <input type="number" id="catB" placeholder="Довжина B"><br>
+        <button onclick="calculateHypotenuse()">Обчислити гіпотенузу</button>
+    </div>
+
+    <script>
+        // ==========================================
+        // ЗАВДАННЯ 1: Реалізація прикладів 1-3
+        // ==========================================
+        
+        function checkDigits(str) {
+            for(var i=0; i<str.length; i++) {
+                if(str.charCodeAt(i) < 48 || str.charCodeAt(i) > 57) return "This is not a number";
+            }
+            return "This is a number";
+        }
+
+        var floatStr = "Here may be your own text... ";
+        var resTimer;
+        function floatingText() {
+            floatStr = floatStr.substring(1, floatStr.length) + floatStr.charAt(0); // Оновлено для нескінченної прокрутки
+            window.status = floatStr; // Працює лише у старих браузерах, що підтримують статус-бар
+            resTimer = setTimeout("floatingText()", 200);
+        }
+        function startFloatingText() { floatingText(); }
+
+        function checkEmail(str) {
+            if(str.indexOf("@") == -1) return "E-mail задано неправильно";
+            if(str.indexOf("@") != str.lastIndexOf("@")) return "E-mail задано неправильно";
+            if(str.charAt(0) =="@" || str.charAt(str.length-1) == "@") return "E-mail задано неправильно";
+            return "Потрібна додаткова перевірка";
+        }
+
+        // ==========================================
+        // ЗАВДАННЯ 2: Перевірка дійсного числа
+        // ==========================================
+        function checkRealNumber(str) {
+            let separatorCount = 0;
+            for(let i=0; i<str.length; i++) {
+                let code = str.charCodeAt(i);
+                // Код 46 - крапка, код 44 - кома
+                if (code === 46 || code === 44) {
+                    separatorCount++;
+                    if (separatorCount > 1) return "Не число (забагато розділювачів)";
+                } else if (code < 48 || code > 57) {
+                    return "Не число (містить недопустимі символи)";
+                }
+            }
+            return "Це дійсне число";
+        }
+
+        // ==========================================
+        // ЗАВДАННЯ 3: Видалення послідовних пробілів
+        // ==========================================
+        function removeExtraSpaces(str) {
+            let result = "";
+            for(let i = 0; i < str.length; i++) {
+                if(str.charAt(i) === ' ' && str.charAt(i+1) === ' ') {
+                    continue; // Пропускаємо дублюючі пробіли
+                }
+                result += str.charAt(i);
+            }
+            return result;
+        }
+
+        // ==========================================
+        // ЗАВДАННЯ 4: Вдосконалена перевірка E-mail
+        // ==========================================
+        function advancedCheckEmail(str) {
+            let atPos = str.indexOf("@");
+            if(atPos === -1 || atPos !== str.lastIndexOf("@") || atPos === 0 || atPos === str.length - 1) {
+                return "E-mail задано неправильно (помилка з @)";
+            }
+            
+            let dotPos = str.indexOf(".", atPos);
+            // Крапка повинна бути після @ і між ними має бути мінімум 1 символ (dotPos - atPos > 1)
+            if (dotPos === -1 || (dotPos - atPos <= 1) || dotPos === str.length - 1) {
+                return "E-mail задано неправильно (помилка з крапкою)";
+            }
+            return "E-mail задано правильно";
+        }
+
+        // ==========================================
+        // ЗАВДАННЯ 5: Вивід поточної дати у форматі
+        // ==========================================
+        function showCurrentDateTime() {
+            let d = new Date();
+            let day = d.getDate();
+            let month = d.getMonth() + 1; // Додаємо 1, бо місяці від 0 до 11
+            let year = d.getFullYear();
+            let hours = d.getHours();
+            let minutes = d.getMinutes();
+            
+            // Додаємо нулі спереду для красивого формату (09 замість 9)
+            month = month < 10 ? '0' + month : month;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            
+            alert("Сьогодні " + day + "/" + month + "/" + year + " " + hours + ":" + minutes);
+        }
+
+        // ==========================================
+        // ДАНІ ДЛЯ ЗАВДАНЬ 6, 7, 8, 11
+        // УВАГА: Замініть ці числа на вашу дату народження!
+        // ==========================================
+        const myYear = 2005; // Ваш рік народження
+        const myMonth = 8;   // Ваш місяць (увага: вересень = 8, бо нумерація з 0)
+        const myDay = 15;    // Ваше число
+
+        const daysOfWeek = ["Неділя", "Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця", "Субота"];
+
+        // ЗАВДАННЯ 6: День народження
+        function showBirthDayOfWeek() {
+            let bDate = new Date(myYear, myMonth, myDay);
+            alert("Я народився у такий день тижня: " + daysOfWeek[bDate.getDay()]);
+        }
+
+        // ЗАВДАННЯ 7: День народження у минулому (10, 12, 25, 38 років тому)
+        function showPastBirthdays() {
+            let pastYears = [10, 12, 25, 38];
+            for (let i = 0; i < pastYears.length; i++) {
+                let pastDate = new Date(myYear - pastYears[i], myMonth, myDay);
+                alert(pastYears[i] + " років тому це був день: " + daysOfWeek[pastDate.getDay()]);
+            }
+        }
+
+        // ЗАВДАННЯ 8: День народження через 3 роки
+        function showFutureBirthday() {
+            let futureDate = new Date(myYear + 3, myMonth, myDay);
+            alert("Через 3 роки мій день народження припаде на: " + daysOfWeek[futureDate.getDay()]);
+        }
+
+        // ==========================================
+        // ЗАВДАННЯ 9: Інтервал між двома моментами
+        // ==========================================
+        function calculateTimeInterval() {
+            let h1 = parseInt(document.getElementById('h1').value) || 0;
+            let m1 = parseInt(document.getElementById('m1').value) || 0;
+            let h2 = parseInt(document.getElementById('h2').value) || 0;
+            let m2 = parseInt(document.getElementById('m2').value) || 0;
+
+            let date1 = new Date(); date1.setHours(h1, m1, 0, 0);
+            let date2 = new Date(); date2.setHours(h2, m2, 0, 0);
+
+            // Знаходимо модуль різниці у мілісекундах та переводимо у хвилини
+            let diffInMinutes = Math.abs(date2 - date1) / 60000;
+            
+            let resHours = Math.floor(diffInMinutes / 60);
+            let resMinutes = diffInMinutes % 60;
+            
+            alert("Інтервал: " + resHours + " год " + resMinutes + " хв");
+        }
+
+        // ==========================================
+        // ЗАВДАННЯ 10: Перевірка вмісту поля на число
+        // ==========================================
+        function isFieldANumber() {
+            let val = document.getElementById('checkNumInput').value;
+            // Перевіряємо на порожній рядок, бо isNaN("") повертає false
+            if (val.trim() === "" || isNaN(val)) {
+                alert("Помилка: це НЕ число!");
+            } else {
+                alert("Успіх: це число!");
+            }
+        }
+
+        // ==========================================
+        // ЗАВДАННЯ 11: Системи числення (сума дати)
+        // ==========================================
+        function showNumberSystems() {
+            // Реальний номер місяця для додавання (myMonth + 1)
+            let sum = new Number(myDay + (myMonth + 1) + myYear);
+            alert("Сума дня, місяця та року: " + sum + "\n" +
+                  "У двійковій: " + sum.toString(2) + "\n" +
+                  "У шістнадцятковій: " + sum.toString(16));
+        }
+
+        // ==========================================
+        // ЗАВДАННЯ 12: Довжина гіпотенузи
+        // ==========================================
+        function calculateHypotenuse() {
+            let a = parseFloat(document.getElementById('catA').value);
+            let b = parseFloat(document.getElementById('catB').value);
+            
+            if(isNaN(a) || isNaN(b) || a <= 0 || b <= 0) {
+                alert("Введіть коректні додатні числа для катетів!");
+                return;
+            }
+
+            let hypotenuse = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+            let resultNumber = new Number(hypotenuse);
+            alert("Гіпотенуза дорівнює: " + resultNumber.toFixed(2));
+        }
+
+        // Виклики функцій з консолі для перевірки завдань без кнопок:
+        // showCurrentDateTime();
+        // showBirthDayOfWeek();
+        // showPastBirthdays();
+        // showFutureBirthday();
+        // showNumberSystems();
+    </script>
 
 </body>
 </html>
