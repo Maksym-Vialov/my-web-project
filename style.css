@@ -1,86 +1,96 @@
-:root {
-    --bg-color: #f4f6f8;
-    --sidebar-color: #1a202c;
-    --accent: #4a90e2;
-    --success: #27ae60;
-    --danger: #e74c3c;
-    --white: #ffffff;
+/* --- СТИЛІ З ЛАБОРАТОРНОЇ №4 --- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f7f9;
+    margin: 0;
+    padding: 0;
+    font-size: 14pt; /* Базовий розмір для завдання 3 */
+    transition: background-color 0.3s; /* Для завдання зміни фону */
 }
 
-body { margin: 0; font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg-color); }
-
-/* Grid Layout сторінки */
-
-.app-container {
-    display: grid;
-    height: 100vh;
-    grid-template-areas: 
-        "header header"
-        "sidebar main"
-        "footer footer";
-    grid-template-columns: 260px 1fr;
-    grid-template-rows: 64px 1fr 40px;
+.header-banner {
+    background-color: #3482b8; /* Синій колір шапки зі скріншоту */
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
 }
 
-.page-header { grid-area: header; background: var(--white); border-bottom: 1px solid #ddd; padding: 0 25px; display: flex; align-items: center; }
-.header-content { display: flex; justify-content: space-between; width: 100%; align-items: center; }
-
-.left-aside { grid-area: sidebar; background: var(--sidebar-color); color: #a0aec0; padding: 20px; }
-.main-view { grid-area: main; padding: 25px; overflow-y: auto; }
-.page-footer { grid-area: footer; background: #fff; border-top: 1px solid #ddd; text-align: center; line-height: 40px; font-size: 12px; }
-
-/* Навігація */
-.nav-group { font-size: 11px; font-weight: bold; margin: 20px 0 10px; color: #4a5568; }
-.nav-item { padding: 10px; border-radius: 5px; cursor: pointer; transition: 0.2s; }
-.nav-item:hover, .nav-item.active { background: #2d3748; color: white; }
-
-/* Вкладена сітка віджетів */
-.widget-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+.header-banner h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 600;
 }
 
-/* Стилі віджетів */
-.widget { background: var(--white); padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-.wide { grid-column: span 2; }
-.full-width { grid-column: 1 / -1; }
+/* Контейнер для білих карток */
+.content-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
 
-/* Графік на CSS */
-.visual-chart {
+.card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    padding: 25px;
+    margin-bottom: 30px;
+}
+
+.card h2 {
+    color: #2980b9;
+    font-size: 20px;
+    margin-top: 0;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e1e8ed;
+}
+
+.card p, .card ul {
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Стилі кнопок з другої картки */
+.badges-row {
     display: flex;
-    align-items: flex-end;
     justify-content: space-around;
-    height: 150px;
-    padding-top: 20px;
-    border-bottom: 2px solid #eee;
-}
-.bar { width: 40px; background: var(--accent); border-radius: 4px 4px 0 0; position: relative; }
-.bar span { position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%); font-size: 12px; color: #666; }
-
-/* Картки показників */
-.big-number { font-size: 32px; font-weight: bold; margin: 10px 0; color: var(--sidebar-color); }
-.trend.up { color: var(--success); font-size: 14px; }
-.progress-container { background: #edf2f7; height: 8px; border-radius: 4px; margin-top: 15px; }
-.progress-bar { background: var(--accent); height: 100%; border-radius: 4px; }
-
-/* Таблиця */
-.data-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-.data-table th { text-align: left; padding: 12px; border-bottom: 2px solid #edf2f7; color: #718096; }
-.data-table td { padding: 12px; border-bottom: 1px solid #edf2f7; }
-.badge { padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
-.badge.ok { background: #c6f6d5; color: #22543d; }
-.badge.error { background: #fed7d7; color: #822727; }
-
-/* Адаптивність */
-@media (max-width: 1024px) {
-    .wide { grid-column: span 1; }
+    margin-top: 20px;
 }
 
-@media (max-width: 768px) {
-    .app-container {
-        grid-template-areas: "header" "main" "footer";
-        grid-template-columns: 1fr;
-    }
-    .left-aside { display: none; }
+.badge {
+    background-color: #e74c3c;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* --- СТИЛІ ДЛЯ НОВОЇ ЛАБИ (Меню) --- */
+#custommenu {
+    position: absolute;
+    width: 250px;
+    visibility: hidden;
+    background-color: silver;
+    border: 2px solid #555;
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+
+.menu-item {
+    color: navy;
+    font-size: 11pt;
+    padding: 8px 10px;
+    cursor: pointer;
+    border: 1px solid transparent; 
+}
+
+/* Поле для вводу */
+.number-input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
 }
