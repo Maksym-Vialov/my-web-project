@@ -104,7 +104,7 @@
         var floatStr = "Here may be your own text... ";
         function floatingText() {
             floatStr = floatStr.substring(1, floatStr.length) + floatStr.charAt(0);
-            window.status = floatStr; 
+            document.getElementById('marqueeOutput').value = floatStr;
             setTimeout("floatingText()", 200);
         }
         function startFloatingText() { floatingText(); }
