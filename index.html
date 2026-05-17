@@ -4,13 +4,31 @@
     <meta charset="UTF-8">
     <title>Лабораторна робота: JavaScript Classes</title>
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; line-height: 1.6; }
-        .task-block { background: #f9f9f9; border: 1px solid #ddd; padding: 15px; margin-bottom: 20px; border-radius: 5px; }
-        input, button { margin: 5px 0; padding: 5px; }
-        button { cursor: pointer; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background-color: #f4f7f6; color: #333; }
+        h2 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .task-block { background: white; border-left: 4px solid #3498db; padding: 15px 20px; margin-bottom: 20px; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .task-block h3 { margin-top: 0; color: #2980b9; font-size: 16px; }
+        input { margin: 5px 5px 10px 0; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        button { cursor: pointer; background-color: #3498db; color: white; border: none; padding: 8px 15px; border-radius: 4px; font-weight: bold; transition: 0.3s; }
+        button:hover { background-color: #2980b9; }
+        .date-info { display: inline-block; background: #e8f4f8; padding: 5px 10px; border-radius: 4px; font-weight: bold; margin-bottom: 15px; color: #2c3e50; }
     </style>
 </head>
 <body onload="startFloatingText()"> <h2>Лабораторна робота: String, Date, Number, Math</h2>
+
+    <div class="task-block">
+        <h3>Завдання 5. Поточна дата та час</h3>
+        <button onclick="showCurrentDateTime()">Показати поточну дату</button>
+    </div>
+
+    <div class="task-block">
+        <h3>Завдання 6, 7, 8, 11. Обчислення з датою</h3>
+        <div class="date-info">Встановлена дата: 17.08.2026</div><br>
+        <button onclick="showBirthDayOfWeek()">День тижня (Завдання 6)</button>
+        <button onclick="showPastBirthdays()">Минулі роки (Завдання 7)</button>
+        <button onclick="showFutureBirthday()">Через 3 роки (Завдання 8)</button>
+        <button onclick="showNumberSystems()">Системи числення (Завдання 11)</button>
+    </div>
 
     <div class="task-block">
         <h3>Завдання 9. Обчислення інтервалу часу</h3>
@@ -20,9 +38,9 @@
     </div>
 
     <div class="task-block">
-        <h3>Завдання 10. Перевірка, чи є вміст полем числом</h3>
-        <input type="text" id="checkNumInput" placeholder="Введіть текст">
-        <button onclick="isFieldANumber()">Перевірити</button>
+        <h3>Завдання 10. Перевірка на число</h3>
+        <input type="text" id="checkNumInput" placeholder="Введіть будь-який текст">
+        <button onclick="isFieldANumber()">Перевірити вміст</button>
     </div>
 
     <div class="task-block">
@@ -34,80 +52,16 @@
 
     <script>
         // ==========================================
-        // ЗАВДАННЯ 1: Реалізація прикладів 1-3
+        // ЗАВДАННЯ 1: Біжуча стрічка (Приклад 2)
         // ==========================================
-        
-        function checkDigits(str) {
-            for(var i=0; i<str.length; i++) {
-                if(str.charCodeAt(i) < 48 || str.charCodeAt(i) > 57) return "This is not a number";
-            }
-            return "This is a number";
-        }
-
         var floatStr = "Here may be your own text... ";
         var resTimer;
         function floatingText() {
-            floatStr = floatStr.substring(1, floatStr.length) + floatStr.charAt(0); // Оновлено для нескінченної прокрутки
-            window.status = floatStr; // Працює лише у старих браузерах, що підтримують статус-бар
+            floatStr = floatStr.substring(1, floatStr.length) + floatStr.charAt(0);
+            window.status = floatStr; // Відображається у статус-барі старих браузерів
             resTimer = setTimeout("floatingText()", 200);
         }
         function startFloatingText() { floatingText(); }
-
-        function checkEmail(str) {
-            if(str.indexOf("@") == -1) return "E-mail задано неправильно";
-            if(str.indexOf("@") != str.lastIndexOf("@")) return "E-mail задано неправильно";
-            if(str.charAt(0) =="@" || str.charAt(str.length-1) == "@") return "E-mail задано неправильно";
-            return "Потрібна додаткова перевірка";
-        }
-
-        // ==========================================
-        // ЗАВДАННЯ 2: Перевірка дійсного числа
-        // ==========================================
-        function checkRealNumber(str) {
-            let separatorCount = 0;
-            for(let i=0; i<str.length; i++) {
-                let code = str.charCodeAt(i);
-                // Код 46 - крапка, код 44 - кома
-                if (code === 46 || code === 44) {
-                    separatorCount++;
-                    if (separatorCount > 1) return "Не число (забагато розділювачів)";
-                } else if (code < 48 || code > 57) {
-                    return "Не число (містить недопустимі символи)";
-                }
-            }
-            return "Це дійсне число";
-        }
-
-        // ==========================================
-        // ЗАВДАННЯ 3: Видалення послідовних пробілів
-        // ==========================================
-        function removeExtraSpaces(str) {
-            let result = "";
-            for(let i = 0; i < str.length; i++) {
-                if(str.charAt(i) === ' ' && str.charAt(i+1) === ' ') {
-                    continue; // Пропускаємо дублюючі пробіли
-                }
-                result += str.charAt(i);
-            }
-            return result;
-        }
-
-        // ==========================================
-        // ЗАВДАННЯ 4: Вдосконалена перевірка E-mail
-        // ==========================================
-        function advancedCheckEmail(str) {
-            let atPos = str.indexOf("@");
-            if(atPos === -1 || atPos !== str.lastIndexOf("@") || atPos === 0 || atPos === str.length - 1) {
-                return "E-mail задано неправильно (помилка з @)";
-            }
-            
-            let dotPos = str.indexOf(".", atPos);
-            // Крапка повинна бути після @ і між ними має бути мінімум 1 символ (dotPos - atPos > 1)
-            if (dotPos === -1 || (dotPos - atPos <= 1) || dotPos === str.length - 1) {
-                return "E-mail задано неправильно (помилка з крапкою)";
-            }
-            return "E-mail задано правильно";
-        }
 
         // ==========================================
         // ЗАВДАННЯ 5: Вивід поточної дати у форматі
@@ -115,12 +69,12 @@
         function showCurrentDateTime() {
             let d = new Date();
             let day = d.getDate();
-            let month = d.getMonth() + 1; // Додаємо 1, бо місяці від 0 до 11
+            let month = d.getMonth() + 1; // +1 бо місяці з 0
             let year = d.getFullYear();
             let hours = d.getHours();
             let minutes = d.getMinutes();
             
-            // Додаємо нулі спереду для красивого формату (09 замість 9)
+            // Форматування з нулями (09 замість 9)
             month = month < 10 ? '0' + month : month;
             minutes = minutes < 10 ? '0' + minutes : minutes;
             
@@ -129,21 +83,21 @@
 
         // ==========================================
         // ДАНІ ДЛЯ ЗАВДАНЬ 6, 7, 8, 11
-        // УВАГА: Замініть ці числа на вашу дату народження!
+        // Встановлено: 17 серпня 2026 року
         // ==========================================
-        const myYear = 2005; // Ваш рік народження
-        const myMonth = 8;   // Ваш місяць (увага: вересень = 8, бо нумерація з 0)
-        const myDay = 15;    // Ваше число
+        const myYear = 2026; 
+        const myMonth = 7;   // Серпень - це 7 (бо січень - це 0)
+        const myDay = 17;    
 
         const daysOfWeek = ["Неділя", "Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця", "Субота"];
 
         // ЗАВДАННЯ 6: День народження
         function showBirthDayOfWeek() {
             let bDate = new Date(myYear, myMonth, myDay);
-            alert("Я народився у такий день тижня: " + daysOfWeek[bDate.getDay()]);
+            alert("Ця дата припадає на такий день тижня: " + daysOfWeek[bDate.getDay()]);
         }
 
-        // ЗАВДАННЯ 7: День народження у минулому (10, 12, 25, 38 років тому)
+        // ЗАВДАННЯ 7: Дата у минулому (10, 12, 25, 38 років тому)
         function showPastBirthdays() {
             let pastYears = [10, 12, 25, 38];
             for (let i = 0; i < pastYears.length; i++) {
@@ -152,10 +106,10 @@
             }
         }
 
-        // ЗАВДАННЯ 8: День народження через 3 роки
+        // ЗАВДАННЯ 8: Дата через 3 роки
         function showFutureBirthday() {
             let futureDate = new Date(myYear + 3, myMonth, myDay);
-            alert("Через 3 роки мій день народження припаде на: " + daysOfWeek[futureDate.getDay()]);
+            alert("Через 3 роки ця дата припаде на: " + daysOfWeek[futureDate.getDay()]);
         }
 
         // ==========================================
@@ -170,7 +124,6 @@
             let date1 = new Date(); date1.setHours(h1, m1, 0, 0);
             let date2 = new Date(); date2.setHours(h2, m2, 0, 0);
 
-            // Знаходимо модуль різниці у мілісекундах та переводимо у хвилини
             let diffInMinutes = Math.abs(date2 - date1) / 60000;
             
             let resHours = Math.floor(diffInMinutes / 60);
@@ -184,7 +137,6 @@
         // ==========================================
         function isFieldANumber() {
             let val = document.getElementById('checkNumInput').value;
-            // Перевіряємо на порожній рядок, бо isNaN("") повертає false
             if (val.trim() === "" || isNaN(val)) {
                 alert("Помилка: це НЕ число!");
             } else {
@@ -193,12 +145,12 @@
         }
 
         // ==========================================
-        // ЗАВДАННЯ 11: Системи числення (сума дати)
+        // ЗАВДАННЯ 11: Системи числення
         // ==========================================
         function showNumberSystems() {
-            // Реальний номер місяця для додавання (myMonth + 1)
-            let sum = new Number(myDay + (myMonth + 1) + myYear);
-            alert("Сума дня, місяця та року: " + sum + "\n" +
+            // Реальний номер місяця для математичної суми (myMonth + 1)
+            let sum = new Number(myDay + (myMonth + 1) + myYear); 
+            alert("Сума (17 + 8 + 2026) дорівнює: " + sum + "\n" +
                   "У двійковій: " + sum.toString(2) + "\n" +
                   "У шістнадцятковій: " + sum.toString(16));
         }
@@ -219,14 +171,6 @@
             let resultNumber = new Number(hypotenuse);
             alert("Гіпотенуза дорівнює: " + resultNumber.toFixed(2));
         }
-
-        // Виклики функцій з консолі для перевірки завдань без кнопок:
-        // showCurrentDateTime();
-        // showBirthDayOfWeek();
-        // showPastBirthdays();
-        // showFutureBirthday();
-        // showNumberSystems();
     </script>
-
 </body>
 </html>
