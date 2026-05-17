@@ -2,269 +2,142 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Лабораторна робота: JavaScript Classes</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background-color: #f4f7f6; color: #333; max-width: 800px; margin: auto; }
-        h2 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; text-align: center; }
-        .task-block { background: white; border-left: 4px solid #3498db; padding: 15px 20px; margin-bottom: 20px; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .task-block h3 { margin-top: 0; color: #2980b9; font-size: 16px; margin-bottom: 10px; }
-        input[type="text"], input[type="number"] { margin: 5px 5px 10px 0; padding: 8px; border: 1px solid #ccc; border-radius: 4px; width: 250px; }
-        input[type="number"].time-input { width: 80px; }
-        button { cursor: pointer; background-color: #3498db; color: white; border: none; padding: 8px 15px; border-radius: 4px; font-weight: bold; transition: 0.3s; margin-top: 5px; }
-        button:hover { background-color: #2980b9; }
-        .date-info { display: inline-block; background: #e8f4f8; padding: 5px 10px; border-radius: 4px; font-weight: bold; margin-bottom: 15px; color: #2c3e50; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Основи HTML5 та CSS3</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
-<body onload="startFloatingText()"> <h2>Лабораторна робота: String, Date, Number, Math</h2>
 
-    <div class="task-block">
-        <h3>Завдання 1. Приклади з методички (Натуральне число та базовий Email)</h3>
-        <input type="text" id="naturalInput" placeholder="Введіть натуральне число">
-        <button onclick="testCheckDigits()">Перевірити число</button><br>
+<body oncontextmenu="showCustomMenu(true, event.clientX, event.clientY); return false;" 
+      onclick="showCustomMenu(false, event.clientX, event.clientY);">
 
-        <div style="margin: 15px 0;">
-            <label>Приклад 2 (Біжуча стрічка): </label>
-            <input type="text" id="marqueeOutput" readonly style="background: #e8f4f8; font-family: monospace; font-weight: bold; width: 250px;">
+    <div class="header-banner">
+        <h1>Світ веб-розробки</h1>
+    </div>
+
+    <div class="content-container">
+
+        <div class="card">
+            <h2>Ознайомлення з HTML5</h2>
+            <p>HTML5 — це сучасний стандарт мови розмітки, який дозволяє створювати структуру сторінки за допомогою семантичних тегів:</p>
+            <ul>
+                <li>&lt;header&gt; та &lt;footer&gt;</li>
+                <li>&lt;main&gt; та &lt;section&gt;</li>
+                <li>&lt;article&gt; для контенту</li>
+            </ul>
         </div>
 
-    
-        <input type="text" id="emailInput" placeholder="Введіть Email">
-        <button onclick="testBasicEmail()">Перевірити Email</button>
+        <div class="card">
+            <h2>Стилізація через CSS3</h2>
+            <p>CSS3 відповідає за зовнішній вигляд. У цьому проекті використано:</p>
+            <div class="badges-row">
+                <div class="badge">Flexbox верстка</div>
+                <div class="badge">Закруглені кути</div>
+                <div class="badge">Тіні (Box Shadow)</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Інтерактивність: Зміна зображення</h2>
+            <p>Наведіть вказівник миші на зображення нижче (використано події <code>onmouseover</code> та <code>onmouseout</code>):</p>
+            
+            <div style="text-align: center; margin-top: 15px;">
+                <img src="https://picsum.photos/id/237/300/200" alt="Перше зображення" 
+                     onmouseover="this.src='https://picsum.photos/id/1025/300/200'" 
+                     onmouseout="this.src='https://picsum.photos/id/237/300/200'" 
+                     style="border-radius: 8px; cursor: pointer; transition: 0.3s;">
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Інтерактивність: Перевірка вводу</h2>
+            <p>У текстове поле нижче неможливо ввести символи, відмінні від десяткових цифр (використано подію <code>onkeypress</code>):</p>
+            <input type="text" class="number-input" placeholder="Спробуйте ввести літери або цифри..." onkeypress="return checkSymbol(event);">
+        </div>
+
     </div>
 
-    <div class="task-block">
-        <h3>Завдання 2. Перевірка на дійсне число (одна кома або крапка)</h3>
-        <input type="text" id="realInput" placeholder="Введіть дійсне число (напр. 3.14)">
-        <button onclick="testRealNumber()">Перевірити дійсне число</button>
-    </div>
-
-    <div class="task-block">
-        <h3>Завдання 3. Видалення послідовних пробілів</h3>
-        <input type="text" id="spacesInput" placeholder="Введіть текст з     пробілами">
-        <button onclick="testRemoveSpaces()">Видалити зайві пробіли</button>
-    </div>
-
-    <div class="task-block">
-        <h3>Завдання 4. Удосконалена перевірка Email</h3>
-        <input type="text" id="advEmailInput" placeholder="Введіть Email (обов'язково з крапкою)">
-        <button onclick="testAdvancedEmail()">Повна перевірка Email</button>
-    </div>
-
-    <div class="task-block">
-        <h3>Завдання 5. Поточна дата та час</h3>
-        <button onclick="showCurrentDateTime()">Показати поточну дату</button>
-    </div>
-
-    <div class="task-block">
-        <h3>Завдання 6, 7, 8, 11. Обчислення з датою</h3>
-        <div class="date-info">Встановлена дата: 17.08.2026</div><br>
-        <button onclick="showBirthDayOfWeek()">День тижня (Завдання 6)</button>
-        <button onclick="showPastBirthdays()">Минулі роки (Завдання 7)</button>
-        <button onclick="showFutureBirthday()">Через 3 роки (Завдання 8)</button>
-        <button onclick="showNumberSystems()">Системи числення (Завдання 11)</button>
-    </div>
-
-    <div class="task-block">
-        <h3>Завдання 9. Обчислення інтервалу часу</h3>
-        Час 1: <input type="number" id="h1" class="time-input" min="0" max="23" placeholder="Год"> : <input type="number" id="m1" class="time-input" min="0" max="59" placeholder="Хв"><br>
-        Час 2: <input type="number" id="h2" class="time-input" min="0" max="23" placeholder="Год"> : <input type="number" id="m2" class="time-input" min="0" max="59" placeholder="Хв"><br>
-        <button onclick="calculateTimeInterval()">Обчислити інтервал</button>
-    </div>
-
-    <div class="task-block">
-        <h3>Завдання 10. Перевірка на число (за допомогою isNaN)</h3>
-        <input type="text" id="checkNumInput" placeholder="Введіть будь-який текст">
-        <button onclick="isFieldANumber()">Перевірити вміст</button>
-    </div>
-
-    <div class="task-block">
-        <h3>Завдання 12. Обчислення гіпотенузи</h3>
-        Катет А: <input type="number" id="catA" class="time-input" placeholder="A">
-        Катет Б: <input type="number" id="catB" class="time-input" placeholder="B"><br>
-        <button onclick="calculateHypotenuse()">Обчислити гіпотенузу</button>
+    <div id="custommenu">
+        <div class="menu-item" 
+             onmouseover="this.style.border='1px solid navy'" 
+             onmouseout="this.style.border='1px solid transparent'" 
+             onclick="doAction('copy');">Скопіювати вміст документа</div>
+             
+        <div class="menu-item" 
+             onmouseover="this.style.border='1px solid navy'" 
+             onmouseout="this.style.border='1px solid transparent'" 
+             onclick="doAction('close');">Закрити вікно</div>
+             
+        <div class="menu-item" 
+             onmouseover="this.style.border='1px solid navy'" 
+             onmouseout="this.style.border='1px solid transparent'" 
+             onclick="doAction('fontIncrease');">Збільшити шрифт</div>
+             
+        <div class="menu-item" 
+             onmouseover="this.style.border='1px solid navy'" 
+             onmouseout="this.style.border='1px solid transparent'" 
+             onclick="doAction('fontDecrease');">Зменшити шрифт</div>
+             
+        <div class="menu-item" 
+             onmouseover="this.style.border='1px solid navy'" 
+             onmouseout="this.style.border='1px solid transparent'" 
+             onclick="doAction('changeBkg');">Змінити фон</div>
     </div>
 
     <script>
-        // ==========================================
-        // ЗАВДАННЯ 1: Приклади 1-3
-        // ==========================================
-        // Приклад 1: Перевірка натурального числа
-        function checkDigits(str) {
-            if (!str) return "Порожнє поле";
-            for(var i=0; i<str.length; i++) {
-                if(str.charCodeAt(i) < 48 || str.charCodeAt(i) > 57) return "This is not a number";
+        // 1. Функція для перевірки вводу тільки цифр (Завдання 1)
+        function checkSymbol(event) {
+            let kc = event.keyCode || event.which; // Кросбраузерність
+            if(kc < 48 || kc > 57) {
+                return false; // Забороняємо ввід, якщо не цифра
             }
-            return "This is a number";
-        }
-        function testCheckDigits() {
-            alert(checkDigits(document.getElementById('naturalInput').value));
+            return true;
         }
 
-        // Приклад 2: Біжуча стрічка (Працює у фоні)
-        var floatStr = "Here may be your own text... ";
-        function floatingText() {
-            floatStr = floatStr.substring(1, floatStr.length) + floatStr.charAt(0);
-            document.getElementById('marqueeOutput').value = floatStr;
-            setTimeout("floatingText()", 200);
-        }
-        function startFloatingText() { floatingText(); }
-
-        // Приклад 3: Базова перевірка Email
-        function checkEmail(str) {
-            if(str.indexOf("@") == -1) return "E-mail задано неправильно (немає @)";
-            if(str.indexOf("@") != str.lastIndexOf("@")) return "E-mail задано неправильно (кілька @)";
-            if(str.charAt(0) =="@" || str.charAt(str.length-1) == "@") return "E-mail задано неправильно (@ скраю)";
-            return "Потрібна додаткова перевірка";
-        }
-        function testBasicEmail() {
-            alert(checkEmail(document.getElementById('emailInput').value));
-        }
-
-        // ==========================================
-        // ЗАВДАННЯ 2: Перевірка дійсного числа
-        // ==========================================
-        function testRealNumber() {
-            let str = document.getElementById('realInput').value;
-            if (!str) { alert("Порожнє поле"); return; }
-            let separatorCount = 0;
-            for(let i=0; i<str.length; i++) {
-                let code = str.charCodeAt(i);
-                if (code === 46 || code === 44) { // Крапка або кома
-                    separatorCount++;
-                    if (separatorCount > 1) { alert("Не дійсне число (забагато розділювачів)"); return; }
-                } else if (code < 48 || code > 57) {
-                    alert("Не дійсне число (недопустимі символи)"); return;
-                }
-            }
-            alert("Це дійсне число!");
-        }
-
-        // ==========================================
-        // ЗАВДАННЯ 3: Видалення зайвих пробілів
-        // ==========================================
-        function testRemoveSpaces() {
-            let str = document.getElementById('spacesInput').value;
-            let result = "";
-            for(let i = 0; i < str.length; i++) {
-                if(str.charAt(i) === ' ' && str.charAt(i+1) === ' ') continue;
-                result += str.charAt(i);
-            }
-            alert("Результат:\n[" + result + "]");
-        }
-
-        // ==========================================
-        // ЗАВДАННЯ 4: Вдосконалена перевірка Email
-        // ==========================================
-        function testAdvancedEmail() {
-            let str = document.getElementById('advEmailInput').value;
-            let atPos = str.indexOf("@");
-            if(atPos === -1 || atPos !== str.lastIndexOf("@") || atPos === 0 || atPos === str.length - 1) {
-                alert("E-mail задано неправильно (проблема з @)"); return;
-            }
-            let dotPos = str.indexOf(".", atPos);
-            if (dotPos === -1 || (dotPos - atPos <= 1) || dotPos === str.length - 1) {
-                alert("E-mail задано неправильно (після @ має бути крапка, а між ними хоча б один символ)"); return;
-            }
-            alert("E-mail задано правильно!");
-        }
-
-        // ==========================================
-        // ЗАВДАННЯ 5: Поточна дата
-        // ==========================================
-        function showCurrentDateTime() {
-            let d = new Date();
-            let day = d.getDate();
-            let month = d.getMonth() + 1;
-            let year = d.getFullYear();
-            let hours = d.getHours();
-            let minutes = d.getMinutes();
-            
-            month = month < 10 ? '0' + month : month;
-            minutes = minutes < 10 ? '0' + minutes : minutes;
-            
-            alert("Сьогодні " + day + "/" + month + "/" + year + " " + hours + ":" + minutes);
-        }
-
-        // ==========================================
-        // ДАНІ ДЛЯ ЗАВДАНЬ 6, 7, 8, 11 (17.08.2026)
-        // ==========================================
-        const myYear = 2026; 
-        const myMonth = 7;   // Серпень = 7
-        const myDay = 17;    
-        const daysOfWeek = ["Неділя", "Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця", "Субота"];
-
-        // ЗАВДАННЯ 6: День народження
-        function showBirthDayOfWeek() {
-            let bDate = new Date(myYear, myMonth, myDay);
-            alert("Ця дата припадає на: " + daysOfWeek[bDate.getDay()]);
-        }
-
-        // ЗАВДАННЯ 7: Дата у минулому
-        function showPastBirthdays() {
-            let pastYears = [10, 12, 25, 38];
-            for (let i = 0; i < pastYears.length; i++) {
-                let pastDate = new Date(myYear - pastYears[i], myMonth, myDay);
-                alert(pastYears[i] + " років тому це був день: " + daysOfWeek[pastDate.getDay()]);
-            }
-        }
-
-        // ЗАВДАННЯ 8: Дата через 3 роки
-        function showFutureBirthday() {
-            let futureDate = new Date(myYear + 3, myMonth, myDay);
-            alert("Через 3 роки дата припаде на: " + daysOfWeek[futureDate.getDay()]);
-        }
-
-        // ==========================================
-        // ЗАВДАННЯ 9: Інтервал між двома моментами
-        // ==========================================
-        function calculateTimeInterval() {
-            let h1 = parseInt(document.getElementById('h1').value) || 0;
-            let m1 = parseInt(document.getElementById('m1').value) || 0;
-            let h2 = parseInt(document.getElementById('h2').value) || 0;
-            let m2 = parseInt(document.getElementById('m2').value) || 0;
-
-            let date1 = new Date(); date1.setHours(h1, m1, 0, 0);
-            let date2 = new Date(); date2.setHours(h2, m2, 0, 0);
-
-            let diffInMinutes = Math.abs(date2 - date1) / 60000;
-            let resHours = Math.floor(diffInMinutes / 60);
-            let resMinutes = diffInMinutes % 60;
-            
-            alert("Інтервал: " + resHours + " год " + resMinutes + " хв");
-        }
-
-        // ==========================================
-        // ЗАВДАННЯ 10: Перевірка на число (isNaN)
-        // ==========================================
-        function isFieldANumber() {
-            let val = document.getElementById('checkNumInput').value;
-            if (val.trim() === "" || isNaN(val)) {
-                alert("Помилка: це НЕ число!");
+        // 2. Функція відображення меню (Завдання 2)
+        function showCustomMenu(sign, x, y) {
+            var cm = document.getElementById("custommenu");
+            if(sign) {
+                cm.style.visibility = 'visible';
+                // Додаємо scrollX/scrollY, щоб меню з'являлося правильно, навіть якщо сторінку прокручено вниз
+                cm.style.left = (x + window.scrollX) + 'px'; 
+                cm.style.top = (y + window.scrollY) + 'px';
             } else {
-                alert("Успіх: це число!");
+                cm.style.visibility = 'hidden';
             }
         }
 
-        // ==========================================
-        // ЗАВДАННЯ 11: Системи числення
-        // ==========================================
-        function showNumberSystems() {
-            let sum = new Number(myDay + (myMonth + 1) + myYear); 
-            alert("Сума (17 + 8 + 2026) дорівнює: " + sum + "\nУ двійковій: " + sum.toString(2) + "\nУ шістнадцятковій: " + sum.toString(16));
-        }
+        // 3. Функція обробки натискань меню (Завдання 3)
+        let currentFontSize = 14; // Поточний розмір шрифту body
 
-        // ==========================================
-        // ЗАВДАННЯ 12: Гіпотенуза
-        // ==========================================
-        function calculateHypotenuse() {
-            let a = parseFloat(document.getElementById('catA').value);
-            let b = parseFloat(document.getElementById('catB').value);
-            
-            if(isNaN(a) || isNaN(b) || a <= 0 || b <= 0) {
-                alert("Введіть коректні додатні числа!"); return;
+        function doAction(actionType) {
+            switch(actionType) {
+                case "copy":
+                    alert("Вміст скопійовано!");
+                    break;
+                    
+                case "close":
+                    window.close(); // Може блокуватися браузером
+                    break;
+                    
+                case "fontIncrease":
+                    currentFontSize += 2;
+                    document.body.style.fontSize = currentFontSize + "pt";
+                    break;
+                    
+                case "fontDecrease":
+                    currentFontSize -= 2;
+                    if(currentFontSize < 10) currentFontSize = 10; 
+                    document.body.style.fontSize = currentFontSize + "pt";
+                    break;
+                    
+                case "changeBkg":
+                    // Генеруємо світлий випадковий колір, щоб текст залишався читабельним
+                    let r = Math.floor(Math.random() * 56) + 200; // 200-255
+                    let g = Math.floor(Math.random() * 56) + 200;
+                    let b = Math.floor(Math.random() * 56) + 200;
+                    document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+                    break;
             }
-            let hypotenuse = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
-            alert("Гіпотенуза дорівнює: " + hypotenuse.toFixed(2));
         }
     </script>
 </body>
